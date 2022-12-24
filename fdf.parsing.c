@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.utils.c                                        :+:      :+:    :+:   */
+/*   fdf.parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 22:14:35 by yettabaa          #+#    #+#             */
-/*   Updated: 2022/12/23 03:41:26 by yettabaa         ###   ########.fr       */
+/*   Updated: 2022/12/24 21:19:28 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,54 +16,6 @@ void	ft_error(const char *str)
 {
 	write(2, str, ft_strlen(str));
 	exit(1);
-}
-
-int	count_x(char const *s)
-{
-	int	i;
-
-	i = 0;
-	while (*s)
-	{
-		while ((*s == 32 || *s == '\n') && *s) // should skip space or \n
-			s++;
-		if (*s != 32 && *s != '\n' && *s)
-		{
-			while (*s != 32 && *s != '\n' && *s)
-			// should skip no space and no \n
-				s++;
-			i++;
-		}
-	}
-	return (i);
-}
-
-char	**gnl_maps_xy(char *name, int *x, int *y)
-{
-	int		fd;
-	char	*read;
-	char	*tmp;
-	char	**lines;
-
-	fd = open(name, O_RDONLY);
-	if (fd < 0)
-		perror("");
-	*y = 0;
-	tmp = NULL;
-	read = get_next_line(fd);
-	*x = count_x(read);
-	while (read)
-	{
-		if (*x > count_x(read) && read)
-			ft_error("Found wrong line length. Exiting.\n");
-		tmp = ft_strjoin(tmp, read);
-		free(read);
-		read = get_next_line(fd);
-		(*y)++;
-	}
-	lines = ft_split(tmp, '\n');
-	free(tmp);
-	return (lines);
 }
 
 void	free_strs(char **strs)
@@ -91,3 +43,65 @@ void	free_tab(int **tab, int y)
 	}
 	free(tab);
 }
+
+void	cheker_z(char *str, int *tab_z, int *tab_color)
+{
+
+	char	**spl_vrg;
+	
+	spl_vrg = ft_split(str, ',');
+	*tab_z = ft_atoi(spl_vrg[0]);
+	if (!spl_vrg[1] && !ft_strchr(str, ','))
+		*tab_color = 16777215;
+	else if (!ft_strncmp(spl_vrg[1], "0x", 2) || !ft_strncmp(spl_vrg[1], "0X",2))
+		*tab_color = ft_atoi_hexa(spl_vrg[1]);
+	else
+		*tab_color = ft_atoi(spl_vrg[1]);
+	free_strs(spl_vrg);
+}
+
+void 	get_z_coordinates(char *name, int ***tab_z, int ***tab_color,int *x, int *y)
+{
+	int		**tabz;
+	int		**tabc;
+	char	**strs;
+	char	**maps;
+	int		save_x;
+	int		i;
+	int		j;
+
+	maps = get_next_line(name, y);
+	tabz = malloc(sizeof(int *) * (*y));
+	tabc = malloc(sizeof(int *) * (*y));
+	if (!tabz || !tabc)
+		return ;
+	j = 0;
+	strs = ft_split_count(maps[j], ' ', &save_x);
+	*x = save_x; 
+	while (++j <= (*y))
+	{
+		i = -1;
+		tabz[j - 1] = malloc(sizeof(int) * (*x)); // allocate sazeof first line 
+		tabc[j - 1] = malloc(sizeof(int) * (*x)); // allocate sazeof first line 
+		if (!tabz[j - 1] || !tabc[j - 1])
+			return ;
+		while (++i < (*x))
+			cheker_z(strs[i], &tabz[j - 1][i], &tabc[j - 1][i]);
+		strs = ft_split_count(maps[j], ' ', &save_x);
+		if (save_x < *x)
+			ft_error("Found wrong line length. Exiting.\n");
+	}
+	*tab_color = tabc;
+	*tab_z = tabz;
+	free_strs(maps);
+	// system("leaks fdf");
+}
+
+void print_strs(char **s)
+{
+    int d = 0;
+    while (s[d])
+        printf("%s\n", s[d++]);
+}
+
+
