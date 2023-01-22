@@ -6,7 +6,7 @@
 #    By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/19 16:05:35 by yettabaa          #+#    #+#              #
-#    Updated: 2023/01/18 04:26:26 by yettabaa         ###   ########.fr        #
+#    Updated: 2023/01/22 22:28:54 by yettabaa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ CC = CC
 
 # CFLAGS = -Wall -Wextra -Werror 
 
-MLXFLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit 
+MLXFLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit -Ofast
 
 MANDA = fdf.c fdf.parsing.c fdf.mlx.c
 
