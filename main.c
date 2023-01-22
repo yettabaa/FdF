@@ -2,9 +2,9 @@
 #include <math.h>
 #include "fdf.h"
 
-int trma(float x) {
-    return round((x - (int)x)*1000);
-}
+// int trma(float x) {
+//     return round((x - (int)x)*1000);
+// }
 // int ft_atoi_hexa(char *str)
 // {
 //     int result;
@@ -31,15 +31,13 @@ int trma(float x) {
 // }
 int main()
 {
-    char *str = "0123456789abcdef";
+
 
 
     // printf("%d\n", ft_atoi_hexa("0xsFFsFFFF"));
-    int i = 11;
-    while (i--)
-    {
-        printf("%d\n", i);
-    }
+
+    printf("%d\n", fmaxl(5,3));
+    
     
     // printf("%d\n", ft_strchr_ind(str, 0 + 48));
     // printf("hexa = %x", 5555);

@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 21:20:48 by yettabaa          #+#    #+#             */
-/*   Updated: 2022/12/23 04:26:35 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/01/20 03:09:25 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,13 @@ int	ft_atoi(const char *str)
 
 int ft_atoi_hexa(char *str)
 {
-  int result;
+    int result;
     int i;
     int hex;
     char *bas;
 
+    if (!str)
+        return 0;
     bas = "0123456789abcdef";
     i = 2;
     result = 0;
@@ -46,10 +48,10 @@ int ft_atoi_hexa(char *str)
     while (str[i])
     {
         if (ft_isupper(str[i]))
-            hex = ft_strchr_ind(bas, str[i] + 32);
+            hex = ft_strchr_ind(bas, str[i] + 32); 
         else
             hex = ft_strchr_ind(bas, str[i]);
-        if ((ft_isupper(str[i]) || ft_islower(str[i])) && hex == 0 && str[i] != '0')
+        if ((ft_isupper(str[i]) || ft_islower(str[i])) && hex == 0)// && str[i] != '0')
             break;
         result = (result * 16) + hex;
         i++;

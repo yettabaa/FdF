@@ -6,11 +6,24 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 22:14:35 by yettabaa          #+#    #+#             */
-/*   Updated: 2022/12/24 21:19:28 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/01/21 22:44:53 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+// void	free_tab(int **tab, int y)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (i < y)
+// 	{
+// 		free(tab[i]);
+// 		i++;
+// 	}
+// 	free(tab);
+// }
 
 void	ft_error(const char *str)
 {
@@ -31,77 +44,62 @@ void	free_strs(char **strs)
 	free(strs);
 }
 
-void	free_tab(int **tab, int y)
+void	put_z_color(char *str, int *tab_z, int *tab_color)
 {
-	int	i;
-
-	i = 0;
-	while (i < y)
-	{
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
-}
-
-void	cheker_z(char *str, int *tab_z, int *tab_color)
-{
-
 	char	**spl_vrg;
+	char	*color;
 	
 	spl_vrg = ft_split(str, ',');
-	*tab_z = ft_atoi(spl_vrg[0]);
-	if (!spl_vrg[1] && !ft_strchr(str, ','))
-		*tab_color = 16777215;
-	else if (!ft_strncmp(spl_vrg[1], "0x", 2) || !ft_strncmp(spl_vrg[1], "0X",2))
-		*tab_color = ft_atoi_hexa(spl_vrg[1]);
+	if (*str == ',')
+	{
+		*tab_z = 0;
+		color = spl_vrg[0];
+	}
 	else
-		*tab_color = ft_atoi(spl_vrg[1]);
+	{
+		*tab_z = ft_atoi(spl_vrg[0]);
+		color = spl_vrg[1];
+	}	
+	if (!color && !ft_strchr(str, ','))//===> if number befor , and exist nothing after , or if color dosn't exist 
+		*tab_color = 16777215;
+	else if (!color && ft_strchr(str, ',')) // if color not specifier
+		*tab_color = 0;
+	else if (!ft_strncmp(color, "0x", 2) || !ft_strncmp(color, "0X",2))
+		*tab_color = ft_atoi_hexa(color);
+	else
+		*tab_color = ft_atoi(color);
 	free_strs(spl_vrg);
 }
 
-void 	get_z_coordinates(char *name, int ***tab_z, int ***tab_color,int *x, int *y)
+int 	**get_data(char **av, int ***tab_color,int *x, int *y)
 {
-	int		**tabz;
-	int		**tabc;
-	char	**strs;
-	char	**maps;
-	int		save_x;
-	int		i;
-	int		j;
+	t_get_data s;
 
-	maps = get_next_line(name, y);
-	tabz = malloc(sizeof(int *) * (*y));
-	tabc = malloc(sizeof(int *) * (*y));
-	if (!tabz || !tabc)
-		return ;
-	j = 0;
-	strs = ft_split_count(maps[j], ' ', &save_x);
-	*x = save_x; 
-	while (++j <= (*y))
+	s.maps = get_next_line(av[1], y);
+	s.tabz = malloc(sizeof(int *) * (*y));
+	s.tabc = malloc(sizeof(int *) * (*y));
+	if (!s.tabz || !s.tabc)
+		return(NULL);
+	s.j = 0;
+	s.strs = ft_split_count(s.maps[s.j], ' ', &s.save_x);
+	*x = s.save_x; 
+	while (++s.j <= (*y))
 	{
-		i = -1;
-		tabz[j - 1] = malloc(sizeof(int) * (*x)); // allocate sazeof first line 
-		tabc[j - 1] = malloc(sizeof(int) * (*x)); // allocate sazeof first line 
-		if (!tabz[j - 1] || !tabc[j - 1])
-			return ;
-		while (++i < (*x))
-			cheker_z(strs[i], &tabz[j - 1][i], &tabc[j - 1][i]);
-		strs = ft_split_count(maps[j], ' ', &save_x);
-		if (save_x < *x)
+		s.i = -1;
+		s.tabz[s.j - 1] = malloc(sizeof(int) * (*x)); // allocate sazeof first line 
+		s.tabc[s.j - 1] = malloc(sizeof(int) * (*x)); // allocate sazeof first line 
+		if (!s.tabz[s.j - 1] || !s.tabc[s.j - 1])
+			return(NULL);
+		while (++s.i < (*x))
+			put_z_color(s.strs[s.i], &s.tabz[s.j - 1][s.i], &s.tabc[s.j - 1][s.i]);
+		free_strs(s.strs);
+		s.strs = ft_split_count(s.maps[s.j], ' ', &s.save_x);
+		if (s.save_x < *x)
 			ft_error("Found wrong line length. Exiting.\n");
 	}
-	*tab_color = tabc;
-	*tab_z = tabz;
-	free_strs(maps);
 	// system("leaks fdf");
+	return (*tab_color = s.tabc, free_strs(s.maps), s.tabz);
 }
 
-void print_strs(char **s)
-{
-    int d = 0;
-    while (s[d])
-        printf("%s\n", s[d++]);
-}
 
 
