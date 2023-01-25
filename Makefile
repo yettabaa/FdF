@@ -6,7 +6,7 @@
 #    By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/19 16:05:35 by yettabaa          #+#    #+#              #
-#    Updated: 2023/01/22 22:28:54 by yettabaa         ###   ########.fr        #
+#    Updated: 2023/01/25 00:21:15 by yettabaa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC = CC
 
 MLXFLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit -Ofast
 
-MANDA = fdf.c fdf.parsing.c fdf.mlx.c
+MANDA = fdf.c fdf.parsing.c fdf.mlx.c fdf.dda.c fdf.rotation.c
 
 OMANDA = $(MANDA:.c=.o)
 

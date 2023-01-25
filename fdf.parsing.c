@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 22:14:35 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/01/22 23:35:05 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/01/24 06:52:05 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	free_strs(char **strs)
 	}
 	free(strs);
 }
-
+//chek overflow
 void	put_z_color(char *str, int *tab_z, int *tab_color)
 {
 	char	**spl_vrg;

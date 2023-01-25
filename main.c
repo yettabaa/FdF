@@ -35,8 +35,8 @@ int main()
 
 
     // printf("%d\n", ft_atoi_hexa("0xsFFsFFFF"));
-    int x = -5;
-    printf("%d\n", abs(x));
+    int x = 30;
+    printf("%f\n", to_radians(x));
     
     
     // printf("%d\n", ft_strchr_ind(str, 0 + 48));

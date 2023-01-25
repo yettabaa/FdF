@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 16:05:39 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/01/21 22:45:23 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/01/25 00:38:58 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ typedef struct s_get_data
 
 
 void	ft_error(const char *str);
-void	draw_point(void *mlx, void **imgs, void *mlx_win, int color, int x, int y);
+void	dda(t_mlx img, int color, double x, double y, double x1, double y1);
+void rotation(int *x, int *y, int z);
+double to_degrees(double radians);
+double to_radians(double degree);
 int 	**get_data(char **maps, int ***tab_color,int *x, int *y);
 void	cheker_z(char *str, int *tab_z, int *tab_color);
 void	free_tab(int **tab, int y);
