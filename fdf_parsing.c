@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 22:14:35 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/01/24 06:52:05 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/01/26 00:52:32 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,35 +71,33 @@ void	put_z_color(char *str, int *tab_z, int *tab_color)
 	free_strs(spl_vrg);
 }
 
-int 	**get_data(char **av, int ***tab_color,int *x, int *y)
+
+void	get_data(t_colect *v, char **av)
 {
 	t_get_data s;
 
-	s.maps = get_next_line(av[1], y);
-	s.tabz = malloc(sizeof(int *) * (*y));
-	s.tabc = malloc(sizeof(int *) * (*y));
-	if (!s.tabz || !s.tabc)
-		return(NULL);
+	s.maps = get_next_line(av[1], &v->hiegth);
+	v->tab_z = malloc(sizeof(int *) * (v->hiegth));
+	v->tab_c = malloc(sizeof(int *) * (v->hiegth));
+	if (!v->tab_z || !v->tab_c)
+		return;
 	s.j = 0;
 	s.strs = ft_split_count(s.maps[s.j], ' ', &s.save_x);
-	*x = s.save_x; 
-	while (++s.j <= (*y))
+	v->width = s.save_x; 
+	while (++s.j <= (v->hiegth))
 	{
 		s.i = -1;
-		s.tabz[s.j - 1] = malloc(sizeof(int) * (*x)); // allocate sazeof first line 
-		s.tabc[s.j - 1] = malloc(sizeof(int) * (*x)); // allocate sazeof first line 
-		if (!s.tabz[s.j - 1] || !s.tabc[s.j - 1])
-			return(NULL);
-		while (++s.i < (*x))
-			put_z_color(s.strs[s.i], &s.tabz[s.j - 1][s.i], &s.tabc[s.j - 1][s.i]);
+		v->tab_z[s.j - 1] = malloc(sizeof(int) * (v->width)); // allocate sazeof first line 
+		v->tab_c[s.j - 1] = malloc(sizeof(int) * (v->width)); // allocate sazeof first line 
+		if (!v->tab_z[s.j - 1] || !v->tab_c[s.j - 1])
+			return;
+		while (++s.i < (v->width))
+			put_z_color(s.strs[s.i], &v->tab_z[s.j - 1][s.i], &v->tab_c[s.j - 1][s.i]);
 		free_strs(s.strs);
 		s.strs = ft_split_count(s.maps[s.j], ' ', &s.save_x);
-		if (s.save_x < *x)
+		if (s.save_x < v->width)
 			ft_error("Found wrong line length. Exiting.\n");
 	}
+	// free_strs(s.maps); ?????
 	// system("leaks fdf");
-	return (*tab_color = s.tabc, free_strs(s.maps), s.tabz);
 }
-
-
-

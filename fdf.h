@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 16:05:39 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/01/25 00:38:58 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/01/26 03:09:44 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,16 @@
 
 # include "libft_fdf/libft.h"
 # include <fcntl.h>
+# include <math.h>
 # include <mlx.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <math.h>
 
 typedef struct s_mlx
 {
+	void	*mlx;
+	void	*win;
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
@@ -30,39 +32,49 @@ typedef struct s_mlx
 	int		endian;
 }			t_mlx;
 
-typedef struct s_data
-{
-    int x;
-    int y;
-    int **tab_z;
-	int **tab_c;
-}			t_data;
-
 typedef struct s_get_data
 {
 	int		i;
 	int		j;
 	int		save_x;
-	int		**tabz;
-	int		**tabc;
 	char	**strs;
 	char	**maps;
-}	t_get_data;
+}			t_get_data;
+
+typedef struct s_colect
+{
+	int		hiegth;
+	int		width;
+	int		**tab_z;
+	int		**tab_c;
+	double	x;
+	double	x1;
+	double	y;
+	double	y1;
+	int scaling_x;
+	int scaling_y;
+	int scaling_z;
+	double	angle_x;
+	double	angle_y;
+	double	angle_z;
+	int trans_x;
+	int trans_y;
+	int		i;
+	int		j;
+}			t_colect;
+
+void		get_data(t_colect *v, char **av);
+void		dda(t_mlx img, t_colect v);
+void		transformations(t_colect *v, int next_i, int next_j);
+void scaling(t_colect *v, int next_i, int next_j);
+void	rotation(t_colect *v, double *x, double *y, double z);
+void translation(t_colect *v, double *x, double *y);
+void		ft_error(const char *str);
+double		to_radians(double degree);
+void		cheker_z(char *str, int *tab_z, int *tab_color);
+void		free_tab(int **tab, int y);
+void		free_strs(char **strs);
+void		my_mlx_pixel_put(t_mlx *data, int x, int y, int color);
 
 
-void	ft_error(const char *str);
-void	dda(t_mlx img, int color, double x, double y, double x1, double y1);
-void rotation(int *x, int *y, int z);
-double to_degrees(double radians);
-double to_radians(double degree);
-int 	**get_data(char **maps, int ***tab_color,int *x, int *y);
-void	cheker_z(char *str, int *tab_z, int *tab_color);
-void	free_tab(int **tab, int y);
-void	free_strs(char **strs);
-void	my_mlx_pixel_put(t_mlx *data, int x, int y, int color);
-
-
-
-
-void print_strs(char **s);
 #endif

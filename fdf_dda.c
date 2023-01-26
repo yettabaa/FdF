@@ -6,32 +6,32 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 19:34:31 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/01/24 22:00:18 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/01/26 01:00:35 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void dda(t_mlx img, int color, double x, double y, double x1, double y1)
+void dda(t_mlx img, t_colect v)
 {
     int i;
     double xinc;
     double yinc;
     double steps;
     
-    steps = fmax(fabs(x - x1), fabs(y - y1));
+    steps = fmax(fabs(v.x - v.x1), fabs(v.y - v.y1));
     // in cas x1 inc  to x (x - x1)
-    xinc = (x1 - x) / steps;
-    yinc = (y1 - y) / steps;
+    xinc = (v.x1 - v.x) / steps;
+    yinc = (v.y1 - v.y) / steps;
     i = 0;
     // printf("|xinc = %f|   |yinc = %f|\n", xinc,yinc);
     while (i <= steps)
     {
         // printf("x = %f, y = %f\n", x, y);
-        if (round(x) >= 0 &&  round(x) < 1920 && round(y) >= 0 && round(y) < 1080)
-            my_mlx_pixel_put(&img, round(x), round(y), color);
-        x = x + xinc;
-        y = y + yinc;
+        if (round(v.x) >= 0 &&  round(v.x) < 1920 && round(v.y) >= 0 && round(v.y) < 1080)
+            my_mlx_pixel_put(&img, round(v.x), round(v.y), v.tab_c[v.j][v.i]);
+        v.x = v.x + xinc;
+        v.y = v.y + yinc;
         i++;
     }
 }
