@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 16:05:42 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/01/26 03:24:02 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/01/26 05:27:53 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void init_transformations(t_colect *v)
 {
-	v->scaling_x = 40;
-	v->scaling_y = 40;
-	v->scaling_z = -50;
+	v->scaling_x = 50;
+	v->scaling_y = 50;
+	v->scaling_z = 1;
 	v->trans_x = 600;
-	v->trans_y = 300;
-	v->angle_x = to_radians(30);
-	v->angle_y = to_radians(-30);
-	v->angle_z = to_radians(30);
+	v->trans_y = 500;
+	v->angle_x = to_radians(0);
+	v->angle_y = to_radians(90);
+	v->angle_z = to_radians(0);
 }
 
 void	drawing(t_mlx img, t_colect v)
@@ -35,7 +35,6 @@ void	drawing(t_mlx img, t_colect v)
 		{
 			if (v.i < v.width - 1)
 			{
-
 				transformations(&v, v.i+1, v.j);
 				dda(img, v);
 			}
@@ -50,15 +49,19 @@ void	drawing(t_mlx img, t_colect v)
 
 int	key(int keycode, t_mlx *vars)
 {
-	static int	i;
-
+	int	i;
+	
+	i = 0;
 	if (keycode == 53)
 	{
 		mlx_destroy_window(vars->mlx, vars->win);
 		exit(0);
 	}
 	if (keycode == 126)
-		printf("%d\n", i++);
+	{
+		i += 1;
+		printf("%d\n", i);
+	}
 	return (0);
 }
 

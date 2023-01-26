@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 16:05:39 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/01/26 03:09:44 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/01/26 03:30:27 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,20 +47,20 @@ typedef struct s_colect
 	int		width;
 	int		**tab_z;
 	int		**tab_c;
-	double	x;
-	double	x1;
-	double	y;
-	double	y1;
 	int scaling_x;
 	int scaling_y;
 	int scaling_z;
-	double	angle_x;
-	double	angle_y;
-	double	angle_z;
 	int trans_x;
 	int trans_y;
 	int		i;
 	int		j;
+	double	angle_x;
+	double	angle_y;
+	double	angle_z;
+	double	x;
+	double	x1;
+	double	y;
+	double	y1;
 }			t_colect;
 
 void		get_data(t_colect *v, char **av);
