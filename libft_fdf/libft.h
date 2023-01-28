@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 22:18:32 by yettabaa          #+#    #+#             */
-/*   Updated: 2022/12/23 16:33:21 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/01/27 21:49:00 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 #include <stdio.h>
 # include <fcntl.h>
 
+void	ft_perror(const char *str);
 int		ft_isalpha(int arg);
 int     ft_isupper(int arg);
 int     ft_islower(int arg);

@@ -1,29 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.parsing.c                                      :+:      :+:    :+:   */
+/*   fdf_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 22:14:35 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/01/26 00:52:32 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/01/28 20:08:37 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-// void	free_tab(int **tab, int y)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (i < y)
-// 	{
-// 		free(tab[i]);
-// 		i++;
-// 	}
-// 	free(tab);
-// }
 
 void	ft_error(const char *str)
 {
@@ -31,7 +18,7 @@ void	ft_error(const char *str)
 	exit(1);
 }
 
-void	free_strs(char **strs)
+static void	free_strs(char **strs)
 {
 	int	i;
 
@@ -44,7 +31,7 @@ void	free_strs(char **strs)
 	free(strs);
 }
 //chek overflow
-void	put_z_color(char *str, int *tab_z, int *tab_color)
+static void	put_z_color(char *str, int *tab_z, int *tab_color)
 {
 	char	**spl_vrg;
 	char	*color;
@@ -71,7 +58,6 @@ void	put_z_color(char *str, int *tab_z, int *tab_color)
 	free_strs(spl_vrg);
 }
 
-
 void	get_data(t_colect *v, char **av)
 {
 	t_get_data s;
@@ -80,7 +66,7 @@ void	get_data(t_colect *v, char **av)
 	v->tab_z = malloc(sizeof(int *) * (v->hiegth));
 	v->tab_c = malloc(sizeof(int *) * (v->hiegth));
 	if (!v->tab_z || !v->tab_c)
-		return;
+		return ;
 	s.j = 0;
 	s.strs = ft_split_count(s.maps[s.j], ' ', &s.save_x);
 	v->width = s.save_x; 
@@ -90,7 +76,7 @@ void	get_data(t_colect *v, char **av)
 		v->tab_z[s.j - 1] = malloc(sizeof(int) * (v->width)); // allocate sazeof first line 
 		v->tab_c[s.j - 1] = malloc(sizeof(int) * (v->width)); // allocate sazeof first line 
 		if (!v->tab_z[s.j - 1] || !v->tab_c[s.j - 1])
-			return;
+			return ;
 		while (++s.i < (v->width))
 			put_z_color(s.strs[s.i], &v->tab_z[s.j - 1][s.i], &v->tab_c[s.j - 1][s.i]);
 		free_strs(s.strs);
@@ -98,6 +84,5 @@ void	get_data(t_colect *v, char **av)
 		if (s.save_x < v->width)
 			ft_error("Found wrong line length. Exiting.\n");
 	}
-	// free_strs(s.maps); ?????
-	// system("leaks fdf");
+	free_strs(s.maps);
 }

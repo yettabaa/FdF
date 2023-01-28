@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 21:20:48 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/01/20 03:09:25 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/01/28 19:38:33 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int ft_atoi_hexa(char *str)
             hex = ft_strchr_ind(bas, str[i] + 32); 
         else
             hex = ft_strchr_ind(bas, str[i]);
-        if ((ft_isupper(str[i]) || ft_islower(str[i])) && hex == 0)// && str[i] != '0')
+        if ((ft_isupper(str[i]) || ft_islower(str[i])) && hex == 0)
             break;
         result = (result * 16) + hex;
         i++;

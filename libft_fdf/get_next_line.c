@@ -6,11 +6,17 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 22:29:36 by yettabaa          #+#    #+#             */
-/*   Updated: 2022/12/23 18:42:53 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/01/27 21:48:10 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+void	ft_perror(const char *str)
+{
+	perror(str);
+	exit(1);
+}
 
 char	**get_next_line(char *name, int *y)
 {
@@ -22,7 +28,7 @@ char	**get_next_line(char *name, int *y)
 
 	fd = open(name, O_RDONLY);
 	if (fd < 0)
-		perror("");
+		ft_perror(name);
 	baf = malloc(BUFFER_SIZE + 1);
 	if (!baf)
 		return (NULL);
