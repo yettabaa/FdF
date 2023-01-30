@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 22:14:35 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/01/28 20:08:37 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/01/29 21:05:49 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ static void	free_strs(char **strs)
 	}
 	free(strs);
 }
-//chek overflow
+
 static void	put_z_color(char *str, int *tab_z, int *tab_color)
 {
 	char	**spl_vrg;
 	char	*color;
-	
+
 	spl_vrg = ft_split(str, ',');
 	if (*str == ',')
 	{
@@ -46,12 +46,12 @@ static void	put_z_color(char *str, int *tab_z, int *tab_color)
 	{
 		*tab_z = ft_atoi(spl_vrg[0]);
 		color = spl_vrg[1];
-	}	
-	if (!color && !ft_strchr(str, ','))//===> if number befor , and exist nothing after , or if color dosn't exist 
+	}
+	if (!color && !ft_strchr(str, ','))
 		*tab_color = 16777215;
-	else if (!color && ft_strchr(str, ',')) // if color not specifier
+	else if (!color && ft_strchr(str, ','))
 		*tab_color = 0;
-	else if (!ft_strncmp(color, "0x", 2) || !ft_strncmp(color, "0X",2))
+	else if (!ft_strncmp(color, "0x", 2) || !ft_strncmp(color, "0X", 2))
 		*tab_color = ft_atoi_hexa(color);
 	else
 		*tab_color = ft_atoi(color);
@@ -60,7 +60,7 @@ static void	put_z_color(char *str, int *tab_z, int *tab_color)
 
 void	get_data(t_colect *v, char **av)
 {
-	t_get_data s;
+	t_get_data	s;
 
 	s.maps = get_next_line(av[1], &v->hiegth);
 	v->tab_z = malloc(sizeof(int *) * (v->hiegth));
@@ -69,16 +69,17 @@ void	get_data(t_colect *v, char **av)
 		return ;
 	s.j = 0;
 	s.strs = ft_split_count(s.maps[s.j], ' ', &s.save_x);
-	v->width = s.save_x; 
+	v->width = s.save_x;
 	while (++s.j <= (v->hiegth))
 	{
 		s.i = -1;
-		v->tab_z[s.j - 1] = malloc(sizeof(int) * (v->width)); // allocate sazeof first line 
-		v->tab_c[s.j - 1] = malloc(sizeof(int) * (v->width)); // allocate sazeof first line 
+		v->tab_z[s.j - 1] = malloc(sizeof(int) * (v->width));
+		v->tab_c[s.j - 1] = malloc(sizeof(int) * (v->width));
 		if (!v->tab_z[s.j - 1] || !v->tab_c[s.j - 1])
 			return ;
 		while (++s.i < (v->width))
-			put_z_color(s.strs[s.i], &v->tab_z[s.j - 1][s.i], &v->tab_c[s.j - 1][s.i]);
+			put_z_color(s.strs[s.i], &v->tab_z[s.j - 1][s.i], &v->tab_c[s.j
+					- 1][s.i]);
 		free_strs(s.strs);
 		s.strs = ft_split_count(s.maps[s.j], ' ', &s.save_x);
 		if (s.save_x < v->width)

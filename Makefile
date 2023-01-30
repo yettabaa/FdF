@@ -6,7 +6,7 @@
 #    By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/19 16:05:35 by yettabaa          #+#    #+#              #
-#    Updated: 2023/01/28 03:09:02 by yettabaa         ###   ########.fr        #
+#    Updated: 2023/01/30 01:22:02 by yettabaa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ MANDA = fdf.c fdf_parsing.c fdf_dda.c fdf_transformations3D.c
 
 OMANDA = $(MANDA:.c=.o)
 
-BONUS = fdf_bonus.c fdf_parsing.c fdf_hook_bonus.c fdf_dda.c fdf_transformations3D.c
+BONUS = fdf_bonus.c fdf_parsing.c fdf_hook_bonus.c fdf_dda.c fdf_transformations3D.c fdf_gradient_colors.c
 
 OBONUS = $(BONUS:.c=.o)
 

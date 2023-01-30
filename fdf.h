@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 16:05:39 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/01/28 20:09:59 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/01/30 05:28:40 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ typedef struct s_mlx
 	void	*init;
 	void	*win;
 	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
+	char	*adr;
+	int		bit_pxl;
+	int		line;
+	int		end;
 }			t_mlx;
 
 typedef struct s_colect
@@ -57,6 +57,8 @@ typedef struct s_colect
 	int		angle_z;
 	int		trans_x;
 	int		trans_y;
+	int		color;
+	int		option_color;
 	double	x;
 	double	x1;
 	double	y;
@@ -67,15 +69,22 @@ typedef struct s_colect
 void		get_data(t_colect *v, char **av);
 void		ft_error(const char *str);
 void		my_mlx_pixel_put(t_colect *v, int x, int y, int color);
-void		dda(t_colect *v);
+// void		dda(t_colect *v);
+void	dda(t_colect *v ,int next_i, int next_j);
 void		drawing(t_colect *v);
 void		transformations_parameter(t_colect *v);
+void transformations_parameter_bonus(t_colect *v);
 void		transformations(t_colect *v, int next_i, int next_j);
-void		isometric(double *x, double *y, double z);
+void isometric(t_colect *v, double *x, double *y, double z);
 void		scaling(t_colect *v, int next_i, int next_j);
 void		rotation(t_colect *v, double *x, double *y, double z);
 void		translation(t_colect *v, double *x, double *y);
 double		rad(double degree);
+double	ft_percent(double i, double steps);
+int	ft_gradient(int start, int end, double percent);
 int			mouse(int keycode, int x, int y, t_colect *v);
 int			key(int keycode, t_colect *v);
+int		key_next(int keycode,t_colect *v);
+void put_info(t_colect *v);
+void	my_mlx_pixel_put(t_colect *v, int x, int y, int color);
 #endif

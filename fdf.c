@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 21:29:05 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/01/28 19:46:21 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/01/29 20:50:05 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,34 +14,49 @@
 
 void transformations_parameter(t_colect *v)
 {
-	v->scaling_x = (1080 / v->width);
-	v->scaling_y = (1080 / v->width);
-	v->scaling_z = 2;
+	if (v->width > 100)
+	{
+		v->scaling_x = (1500 / v->width) ;
+		v->scaling_y = (1500 / v->width) ;
+		v->scaling_z = 2;
+	}
+	else
+	{
+		v->scaling_x = (1080 / v->width) * 0.8;
+		v->scaling_y = (1080 / v->width) * 0.8;
+		v->scaling_z = 3;
+	}
 	v->trans_x = 1920 / 2;
 	v->trans_y = 1080 / 2;
-	// v->angle_x = 45;
-	// v->angle_y = 45;
-	// v->angle_z = -30;
 }
+
 void	 transformations(t_colect *v, int next_i, int next_j)
 {
 	scaling(v, next_i, next_j);
-	// rotation(v, &v->x, &v->y, v->tab_z[v->j][v->i]);
-	// rotation(v, &v->x1, &v->y1, v->tab_z[next_j][next_i]);
-	isometric(&v->x, &v->y, v->tab_z[v->j][v->i]);
-	isometric(&v->x1, &v->y1, v->tab_z[next_j][next_i]);
+	isometric(v, &v->x, &v->y, v->tab_z[v->j][v->i]);
+	isometric(v,&v->x1, &v->y1, v->tab_z[next_j][next_i]);
 	translation(v, &v->x, &v->y);
 	translation(v, &v->x1, &v->y1);
 }
+
 int	destroy(void)
 {
 	exit(0);
 	return (0);
 }
+
+int esc(int keycode)
+{
+	if (keycode == 53)
+		exit(0);
+	return (0);	
+}
+
 void chek_leak(void) //!!!!!!!!!
 {
     system("leaks fdf");
 }
+
 int	main(int ac, char **av)
 {
 	t_colect	v;
@@ -51,14 +66,15 @@ int	main(int ac, char **av)
 		ft_error("Invalid number of arguments.\n");
 	get_data(&v, av);
 	transformations_parameter(&v);
-	v.init = mlx_init();
-	v.win = mlx_new_window(v.init, 1920, 1080, "FdF");
-	v.img = mlx_new_image(v.init, 1920, 1080);
-	v.addr = mlx_get_data_addr(v.img, &v.bits_per_pixel, &v.line_length,
-			&v.endian);
+	v.mlx.init = mlx_init();
+	v.mlx.win = mlx_new_window(v.mlx.init, 1920, 1080, "FdF");
+	v.mlx.img = mlx_new_image(v.mlx.init, 1920, 1080);
+	v.mlx.adr = mlx_get_data_addr(v.mlx.img, &v.mlx.bit_pxl, &v.mlx.line,
+			&v.mlx.end);
 	drawing(&v);
-    mlx_hook(v.win, 2, 0, destroy, &v);//????
-    mlx_hook(v.win, 17, 0, destroy, &v);//???
-	mlx_put_image_to_window(v.init, v.win, v.img, 0, 0);
-	mlx_loop(v.init);
+    mlx_hook(v.mlx.win, 2, 0, esc, &v);//????
+    mlx_hook(v.mlx.win, 17, 0, destroy, &v);//???
+	mlx_put_image_to_window(v.mlx.init, v.mlx.win, v.mlx.img, 0, 0);
+	mlx_loop(v.mlx.init);
 }
+ 
