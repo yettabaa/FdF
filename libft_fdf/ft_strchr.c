@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 21:21:42 by yettabaa          #+#    #+#             */
-/*   Updated: 2022/12/23 00:26:46 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/01/30 22:24:14 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ char	*ft_strchr(const char *str, int c)
 
 int	ft_strchr_ind(const char *str, int c)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
 	if (!str)
 		return (0);

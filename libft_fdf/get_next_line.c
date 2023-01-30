@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 22:29:36 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/01/27 21:48:10 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/01/30 22:27:31 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	ft_perror(const char *str)
 
 char	**get_next_line(char *name, int *y)
 {
-	int 		fd;
-	long long 	size;
+	int			fd;
+	long long	size;
 	char		*baf;
 	char		*stock;
 	char		**lines;
@@ -43,5 +43,5 @@ char	**get_next_line(char *name, int *y)
 		stock = ft_strjoin_gnl(stock, baf);
 	}
 	lines = ft_split_count(stock, '\n', y);
-	return (free(baf) ,free(stock), lines);
+	return (free(baf), free(stock), lines);
 }

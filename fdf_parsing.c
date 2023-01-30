@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 22:14:35 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/01/29 21:05:49 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/01/30 21:07:23 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	free_strs(char **strs)
 	free(strs);
 }
 
-static void	put_z_color(char *str, int *tab_z, int *tab_color)
+static void	zc(char *str, int *tab_z, int *tab_color)
 {
 	char	**spl_vrg;
 	char	*color;
@@ -78,8 +78,7 @@ void	get_data(t_colect *v, char **av)
 		if (!v->tab_z[s.j - 1] || !v->tab_c[s.j - 1])
 			return ;
 		while (++s.i < (v->width))
-			put_z_color(s.strs[s.i], &v->tab_z[s.j - 1][s.i], &v->tab_c[s.j
-					- 1][s.i]);
+			zc(s.strs[s.i], &v->tab_z[s.j - 1][s.i], &v->tab_c[s.j - 1][s.i]);
 		free_strs(s.strs);
 		s.strs = ft_split_count(s.maps[s.j], ' ', &s.save_x);
 		if (s.save_x < v->width)

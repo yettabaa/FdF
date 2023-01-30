@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 00:30:36 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/01/30 02:57:19 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/01/30 22:27:16 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,3 @@ char	*ft_strjoin_gnl(char const *s1, char const *s2)
 	free((void *)s1);
 	return (str);
 }
-
-
-

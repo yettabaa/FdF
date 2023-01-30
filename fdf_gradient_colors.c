@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 22:19:34 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/01/29 23:54:42 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/01/30 22:30:15 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,16 @@ double	ft_percent(double i, double steps)
 		return (i / steps);
 }
 
-int	ft_gradient(int start, int end, double percent)
+int	ft_gradient(int start_color, int end_color, double percent)
 {
-	int		new[4];
+	int	new[4];
 
-	new[0] = (int)round((1 - percent) * get_r(start) + percent * get_r(end));
-	new[1] = (int)round((1 - percent) * get_g(start) + percent * get_g(end));
-	new[2] = (int)round((1 - percent) * get_b(start) + percent * get_b(end));
-	new[3] = end & (0xFF << 24);
+	new[0] = (int)round((1 - percent) * get_r(start_color) + percent
+			* get_r(end_color));
+	new[1] = (int)round((1 - percent) * get_g(start_color) + percent
+			* get_g(end_color));
+	new[2] = (int)round((1 - percent) * get_b(start_color) + percent
+			* get_b(end_color));
+	new[3] = end_color &(0xFF << 24);
 	return (new[3] << 24 | new[0] << 16 | new[1] << 8 | new[2]);
 }

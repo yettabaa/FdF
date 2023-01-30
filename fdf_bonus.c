@@ -6,18 +6,18 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 16:05:42 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/01/30 05:30:37 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/01/30 22:32:42 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void transformations_parameter_bonus(t_colect *v)
+void	initialisation_bonus(t_colect *v, int ang_x, int ang_y, int ang_z)
 {
 	if (v->width > 100)
 	{
-		v->scaling_x = (1500 / v->width) ;
-		v->scaling_y = (1500 / v->width) ;
+		v->scaling_x = (1500 / v->width);
+		v->scaling_y = (1500 / v->width);
 		v->scaling_z = 2;
 	}
 	else
@@ -26,16 +26,16 @@ void transformations_parameter_bonus(t_colect *v)
 		v->scaling_y = (1080 / v->width) * 0.8;
 		v->scaling_z = 3;
 	}
-	v->angle_x = 45;
-	v->angle_y = 45;
-	v->angle_z = -35;
+	v->angle_x = ang_x;
+	v->angle_y = ang_y;
+	v->angle_z = ang_z;
 	v->trans_x = 1920 / 2;
 	v->trans_y = 1080 / 2;
 	v->option_color = 0;
 	put_info(v);
 }
 
-void	 transformations(t_colect *v, int next_i, int next_j)
+void	transformations_bonus(t_colect *v, int next_i, int next_j)
 {
 	scaling(v, next_i, next_j);
 	rotation(v, &v->x, &v->y, v->tab_z[v->j][v->i]);
@@ -44,35 +44,30 @@ void	 transformations(t_colect *v, int next_i, int next_j)
 	translation(v, &v->x1, &v->y1);
 }
 
-int	destroy(void)
+static int	destroy_bonus(void)
 {
 	exit(0);
 	return (0);
-}
-void chek_leak(void) //!!!!!!!!!
-{
-    system("leaks fdf");
 }
 
 int	main(int ac, char **av)
 {
 	t_colect	v;
-	// char	*relative_path = "./test.xpm";
-	atexit(chek_leak);//!!!!!!!!
-	/// aderstind rotation and isometric // mlx function // information in the window
+
 	if (ac != 2)
 		ft_error("Invalid number of arguments.\n");
 	v.mlx.init = mlx_init();
 	v.mlx.win = mlx_new_window(v.mlx.init, 2170, 1080, "FdF");
 	get_data(&v, av);
-	transformations_parameter_bonus(&v);
+	initialisation_bonus(&v, 45, 45, -35);
 	v.mlx.img = mlx_new_image(v.mlx.init, 1920, 1080);
-	v.mlx.adr = mlx_get_data_addr(v.mlx.img, &v.mlx.bit_pxl, &v.mlx.line, &v.mlx.end);
+	v.mlx.adr = mlx_get_data_addr(v.mlx.img, &v.mlx.bit_pxl, &v.mlx.line,
+			&v.mlx.end);
 	printf("x = %d, y = %d\n", v.width, v.hiegth);
-	drawing(&v);
+	drawing_bonus(&v);
 	mlx_put_image_to_window(v.mlx.init, v.mlx.win, v.mlx.img, 250, 0);
 	mlx_mouse_hook(v.mlx.win, mouse, &v);
 	mlx_hook(v.mlx.win, 2, 0, key, &v);
-	mlx_hook(v.mlx.win, 17, 0, destroy, &v);
+	mlx_hook(v.mlx.win, 17, 0, destroy_bonus, &v);
 	mlx_loop(v.mlx.init);
 }
