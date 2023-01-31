@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 20:43:58 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/01/30 22:28:41 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/01/31 04:42:04 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,14 @@ void	my_mlx_pixel_put(t_colect *v, int x, int y, int color)
 
 	dst = v->mlx.adr + (y * v->mlx.line + x * (v->mlx.bit_pxl / 8));
 	*(unsigned int *)dst = color;
+}
+
+static double	ft_percent_bonus(double i, double steps)
+{
+	if (steps == 0)
+		return (1.0);
+	else
+		return (i / steps);
 }
 
 static void	dda_bonus(t_colect *v, int next_i, int next_j)
@@ -34,7 +42,7 @@ static void	dda_bonus(t_colect *v, int next_i, int next_j)
 	i = 0;
 	while (i <= steps)
 	{
-		prc = ft_percent(i, steps);
+		prc = ft_percent_bonus(i, steps);
 		if (v->option_color == 0)
 			v->color = ft_gradient(v->tab_c[v->j][v->i],
 					v->tab_c[next_j][next_i], prc);

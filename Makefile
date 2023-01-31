@@ -6,13 +6,13 @@
 #    By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/19 16:05:35 by yettabaa          #+#    #+#              #
-#    Updated: 2023/01/30 20:56:39 by yettabaa         ###   ########.fr        #
+#    Updated: 2023/01/31 05:39:09 by yettabaa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = CC
 
-CFLAGS = -Wall -Wextra -Werror 
+CFLAGS = -Wall -Wextra -Werror
 
 MLXFLAGS = -lmlx -framework OpenGL -framework AppKit -Ofast
 

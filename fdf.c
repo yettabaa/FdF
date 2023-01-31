@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 21:29:05 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/01/30 22:31:37 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/01/31 04:54:27 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,5 @@ int	main(int ac, char **av)
 	mlx_hook(v.mlx.win, 17, 0, destroy, &v);
 	mlx_put_image_to_window(v.mlx.init, v.mlx.win, v.mlx.img, 0, 0);
 	mlx_loop(v.mlx.init);
+	return (0);
 }

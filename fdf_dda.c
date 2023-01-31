@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 19:34:31 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/01/30 22:29:00 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/01/31 04:41:37 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,14 @@ static void	my_mlx_pixel(t_colect *v, int x, int y, int color)
 
 	dst = v->mlx.adr + (y * v->mlx.line + x * (v->mlx.bit_pxl / 8));
 	*(unsigned int *)dst = color;
+}
+
+static double	ft_percent(double i, double steps)
+{
+	if (steps == 0)
+		return (1.0);
+	else
+		return (i / steps);
 }
 
 static void	dda(t_colect *v, int next_i, int next_j)

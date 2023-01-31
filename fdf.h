@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 16:05:39 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/01/30 22:29:25 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/01/31 05:41:00 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ void		scaling(t_colect *v, int next_i, int next_j);
 void		rotation(t_colect *v, double *x, double *y, double z);
 void		translation(t_colect *v, double *x, double *y);
 double		rad(double degree);
-double		ft_percent(double i, double steps);
 int			ft_gradient(int start, int end, double percent);
 int			mouse(int keycode, int x, int y, t_colect *v);
 int			key(int keycode, t_colect *v);

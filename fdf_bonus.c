@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 16:05:42 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/01/30 22:32:42 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/01/31 04:55:59 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,11 @@ int	main(int ac, char **av)
 	v.mlx.img = mlx_new_image(v.mlx.init, 1920, 1080);
 	v.mlx.adr = mlx_get_data_addr(v.mlx.img, &v.mlx.bit_pxl, &v.mlx.line,
 			&v.mlx.end);
-	printf("x = %d, y = %d\n", v.width, v.hiegth);
 	drawing_bonus(&v);
 	mlx_put_image_to_window(v.mlx.init, v.mlx.win, v.mlx.img, 250, 0);
 	mlx_mouse_hook(v.mlx.win, mouse, &v);
 	mlx_hook(v.mlx.win, 2, 0, key, &v);
 	mlx_hook(v.mlx.win, 17, 0, destroy_bonus, &v);
 	mlx_loop(v.mlx.init);
+	return (0);
 }
