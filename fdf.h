@@ -21,6 +21,29 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+# define WIDTH 1600
+# define RENDER_WIDTH WIDTH * 0.85
+# define INFO_WIDTH WIDTH * 0.15
+# define HIEGTH 800
+# define KEY_ECHAP 65307
+# define KEY_2 65433
+# define KEY_4 65430
+# define KEY_6 65432
+# define KEY_7 65429
+# define KEY_8 65431
+# define KEY_9 65434
+# define KEY_PLUS 65451
+# define KEY_MINUS 65453
+# define KEY_RIGHT 65363
+# define KEY_DOWN 65362
+# define KEY_LEFT 65361
+# define KEY_UP 65364
+# define KEY_X 120
+# define KEY_C 99
+# define KEY_P 112
+# define KEY_H 118
+# define KEY_V 104
+
 typedef struct s_get_data
 {
 	int		i;

@@ -10,11 +10,15 @@
 #                                                                              #
 # **************************************************************************** #
 
-CC = CC
+CC = cc
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -fsanitize=address -g
+
+MLX_DIR = minilibx-linux
 
 MLXFLAGS = -lmlx -framework OpenGL -framework AppKit -Ofast
+
+MLX_LINUX = -L$(MLX_DIR) -lmlx -L/usr/lib -I$(MLX_DIR) -lXext -lX11 -lm -lz -Ofast
 
 MANDA = fdf.c fdf_parsing.c fdf_dda.c fdf_hook.c fdf_transformations3D.c fdf_gradient_colors.c fdf_infos.c
 
@@ -27,11 +31,11 @@ NAME = fdf
 all:	$(NAME)
 
 %.o : %.c fdf.h
-		$(CC) $(CFLAGS) -c $< -o $@
+		$(CC) $(CFLAGS) -I/usr/include -I$(MLX_DIR) -O3 -c $< -o $@
 
 $(NAME):	$(OMANDA)
 		make -C libft_fdf
-		$(CC) $(MLXFLAGS) $(OMANDA) $(LIBFT)  -o $(NAME)
+		$(CC) $(CFLAGS) $(OMANDA) $(LIBFT) $(MLX_LINUX) -o $(NAME)
 		
 clean:
 		make clean -C libft_fdf

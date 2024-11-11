@@ -15,9 +15,10 @@
 void	my_mlx_pixel_put(t_colect *v, int x, int y, int color)
 {
 	char	*dst;
-
-	dst = v->mlx.adr + (y * v->mlx.line + x * (v->mlx.bit_pxl / 8));
-	*(unsigned int *)dst = color;
+	if (x >= 0 && x < WIDTH && y >= 0 && y < HIEGTH) {
+		dst = v->mlx.adr + (y * v->mlx.line + x * (v->mlx.bit_pxl / 8));
+		*(unsigned int *)dst = color;
+	}
 }
 
 static double	ft_percent_bonus(double i, double steps)
@@ -48,8 +49,8 @@ static void	dda_bonus(t_colect *v, int next_i, int next_j)
 					v->tab_c[next_j][next_i], prc);
 		else
 			v->color = v->tab_c[v->j][v->i] >> (i % 10);
-		if (round(v->x) >= 0 && round(v->x) < 1920 && round(v->y) >= 0
-			&& round(v->y) < 1080)
+		if (round(v->x) >= 0 && round(v->x) < RENDER_WIDTH && round(v->y) >= 0
+			&& round(v->y) < HIEGTH)
 			my_mlx_pixel_put(v, round(v->x), round(v->y), v->color);
 		v->x = v->x + xinc;
 		v->y = v->y + yinc;

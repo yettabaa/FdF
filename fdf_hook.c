@@ -16,57 +16,51 @@ static void	put_changes(t_colect *v)
 {
 	put_info(v);
 	mlx_destroy_image(v->mlx.init, v->mlx.img);
-	v->mlx.img = mlx_new_image(v->mlx.init, 1920, 1080);
+	v->mlx.img = mlx_new_image(v->mlx.init, RENDER_WIDTH, HIEGTH);
 	v->mlx.adr = mlx_get_data_addr(v->mlx.img, &v->mlx.bit_pxl, &v->mlx.line,
 			&v->mlx.end);
 	drawing_bonus(v);
-	mlx_put_image_to_window(v->mlx.init, v->mlx.win, v->mlx.img, 250, 0);
+	mlx_put_image_to_window(v->mlx.init, v->mlx.win, v->mlx.img, INFO_WIDTH, 0);
 }
 
 int	key(int keycode, t_colect *v)
 {
-	if (keycode == 53)
+	if (keycode == KEY_ECHAP)
 		exit(0);
-	else if (keycode == 69 && v->scaling_z < 1337)
+	else if (keycode == KEY_PLUS && v->scaling_z < 1337)
 		v->scaling_z += 1;
-	else if (keycode == 78 && v->scaling_z > -1337)
+	else if (keycode == KEY_MINUS && v->scaling_z > -1337)
 		v->scaling_z -= 1;
-	else if (keycode == 91)
+	else if (keycode == KEY_2)
 		v->angle_x += 5;
-	else if (keycode == 84)
+	else if (keycode == KEY_8)
 		v->angle_x -= 5;
-	else if (keycode == 86)
+	else if (keycode == KEY_4)
 		v->angle_y += 5;
-	else if (keycode == 88)
+	else if (keycode == KEY_6)
 		v->angle_y -= 5;
-	else if (keycode == 92)
+	else if (keycode == KEY_7)
 		v->angle_z -= 5;
-	else if (keycode == 9)
-		initialisation_bonus(v, 0, 90, 0);
-	else if (keycode == 35)
-		initialisation_bonus(v, 0, 0, 0);
-	else if (keycode == 4)
-		initialisation_bonus(v, 90, 0, 0);
-	return (key_next(keycode, v), put_changes(v), 0);
-}
-
-int	key_next(int keycode, t_colect *v)
-{
-	if (keycode == 89)
+	else if (keycode == KEY_9)
 		v->angle_z += 5;
-	else if (keycode == 123)
-		v->trans_x -= 30;
-	else if (keycode == 124)
+	else if (keycode == KEY_H)
+		initialisation_bonus(v, 0, 90, 0);
+	else if (keycode == KEY_P)
+		initialisation_bonus(v, 0, 0, 0);
+	else if (keycode == KEY_V)
+		initialisation_bonus(v, 90, 0, 0);
+	else if (keycode == KEY_RIGHT)
 		v->trans_x += 30;
-	else if (keycode == 126)
+	else if (keycode == KEY_LEFT)
+		v->trans_x -= 30;
+	else if (keycode == KEY_DOWN)
 		v->trans_y -= 30;
-	else if (keycode == 125)
+	else if (keycode == KEY_UP)
 		v->trans_y += 30;
-	else if (keycode == 8)
+	else if (keycode == KEY_X)
 		v->option_color = 1337;
-	else if (keycode == 7)
+	else if (keycode == KEY_C)
 		v->option_color = 0;
-	put_changes(v);
 	return (0);
 }
 
@@ -74,10 +68,10 @@ int	mouse(int keycode, int x, int y, t_colect *v)
 {
 	if (keycode == 1)
 	{
-		v->trans_x = x - 250;
+		v->trans_x = x - INFO_WIDTH;
 		v->trans_y = y;
 	}	
-	else if (keycode == 2)
+	else if (keycode == 3)
 		initialisation_bonus(v, 45, 45, -35);
 	else if (keycode == 4 && v->scaling_x > 1)
 	{
@@ -89,6 +83,5 @@ int	mouse(int keycode, int x, int y, t_colect *v)
 		v->scaling_x += 1;
 		v->scaling_y += 1;
 	}
-	put_changes(v);
 	return (0);
 }
