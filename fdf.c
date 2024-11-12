@@ -57,6 +57,7 @@ static int	destroy_bonus(t_colect *v)
 	exit(0);
 	return (0);
 }
+
 int loop_hook(void *ptr)
 {
     t_colect *v;
@@ -71,6 +72,7 @@ int loop_hook(void *ptr)
     mlx_destroy_image(v->mlx.init, v->mlx.img);
     return (0);
 }
+
 int	main(int ac, char **av)
 {
 	t_colect	v;

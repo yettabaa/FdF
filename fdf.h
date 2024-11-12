@@ -108,4 +108,5 @@ int			key(int keycode, t_colect *v);
 int			key_next(int keycode, t_colect *v);
 void		put_info(t_colect *v);
 void		my_mlx_pixel_put(t_colect *v, int x, int y, int color);
+
 #endif

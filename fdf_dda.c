@@ -15,6 +15,7 @@
 void	my_mlx_pixel_put(t_colect *v, int x, int y, int color)
 {
 	char	*dst;
+
 	if (x >= 0 && x < WIDTH && y >= 0 && y < HIEGTH) {
 		dst = v->mlx.adr + (y * v->mlx.line + x * (v->mlx.bit_pxl / 8));
 		*(unsigned int *)dst = color;

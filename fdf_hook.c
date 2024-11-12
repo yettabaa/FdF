@@ -66,20 +66,15 @@ int	key(int keycode, t_colect *v)
 
 int	mouse(int keycode, int x, int y, t_colect *v)
 {
-	if (keycode == 1)
-	{
+	if (keycode == 1) {
 		v->trans_x = x - INFO_WIDTH;
 		v->trans_y = y;
-	}	
-	else if (keycode == 3)
+	} else if (keycode == 3){
 		initialisation_bonus(v, 45, 45, -35);
-	else if (keycode == 4 && v->scaling_x > 1)
-	{
+	} else if (keycode == 4 && v->scaling_x > 1) {
 		v->scaling_x -= 1;
 		v->scaling_y -= 1;
-	}
-	else if (keycode == 5 && v->scaling_x < 1337)
-	{
+	} else if (keycode == 5 && v->scaling_x < 1337) {
 		v->scaling_x += 1;
 		v->scaling_y += 1;
 	}

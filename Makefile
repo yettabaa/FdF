@@ -47,4 +47,3 @@ fclean: clean
 		rm -f $(NAME) $(LIBFT)
 		
 re: fclean all		
-		
