@@ -35,10 +35,12 @@ all:	$(NAME)
 
 $(NAME):	$(OMANDA)
 		make -C libft_fdf
+		make -C minilibx-linux
 		$(CC) $(CFLAGS) $(OMANDA) $(LIBFT) $(MLX_LINUX) -o $(NAME)
 		
 clean:
 		make clean -C libft_fdf
+		make clean -C minilibx-linux
 		rm -f $(OMANDA) $(OBONUS)
 
 fclean: clean
