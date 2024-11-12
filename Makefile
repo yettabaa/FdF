@@ -14,7 +14,7 @@ CC = cc
 
 CFLAGS = -fsanitize=address -g
 
-MLX_DIR = minilibx-linux
+MLX_DIR = mlx-linux
 
 MLXFLAGS = -lmlx -framework OpenGL -framework AppKit -Ofast
 
@@ -35,12 +35,12 @@ all:	$(NAME)
 
 $(NAME):	$(OMANDA)
 		make -C libft_fdf
-		make -C minilibx-linux
+		make -C mlx-linux
 		$(CC) $(CFLAGS) $(OMANDA) $(LIBFT) $(MLX_LINUX) -o $(NAME)
 		
 clean:
 		make clean -C libft_fdf
-		make clean -C minilibx-linux
+		make clean -C mlx-linux
 		rm -f $(OMANDA) $(OBONUS)
 
 fclean: clean
