@@ -82,6 +82,8 @@ int	main(int ac, char **av)
 	v.mlx.init = mlx_init();
 	v.mlx.win = mlx_new_window(v.mlx.init, WIDTH, HIEGTH, "FdF");
 	get_data(&v, av);
+	if (!v.width || !v.hiegth)
+		ft_error("Empty map.\n");
 	initialisation_bonus(&v, 45, 45, -35);
 	mlx_loop_hook(v.mlx.init, loop_hook, &v);
 	mlx_mouse_hook(v.mlx.win, mouse, &v);
