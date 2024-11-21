@@ -2,7 +2,7 @@
 
 [![42 Badge](https://img.shields.io/badge/Score-125%2F100-brightgreen)](#)
 
-![Interactive Map Preview](https://github.com/yettabaa/FdF/blob/main/assets/FdF.gif)
+![Interactive Map Preview](https://github.com/yettabaa/FdF/blob/master/assets/FdF.gif)
 
 **FdF** is a 42 School project that visualizes a 3D wireframe map in a 2D space using custom projections. This project includes all mandatory requirements and bonus features, such as Z-axis scaling and gradient colors, delivering a dynamic and visually appealing application.
 
@@ -18,7 +18,7 @@
 7. [Map Parsing](#map-parsing)
 8. [Pixels and Memory Representation](#pixels-and-memory-representation)
 9. [DDA Algorithm for Line Rendering](#dda-algorithm-for-line-rendering)
-10. [Mathematical Concepts: Transformations](#Mathematical-Concepts:-Transformations)
+10. [Mathematical Concepts: Transformations](#mathematical-concepts:-transformations)
 11. [Gradient Colors](#gradient-colors)
 12. [Contributing](#contributing)
 13. [License](#license)
@@ -78,19 +78,19 @@ Run the program with a sample map:
 ### GIFs
 
 1. **Z-Axis Scaling**  
-   ![Z-Axis Scaling](https://github.com/yettabaa/FdF/blob/main/assets/FdF-Scale-Z.gif)  
+   ![Z-Axis Scaling](https://github.com/yettabaa/FdF/blob/master/assets/FdF-Scale-Z.gif)  
    Adjusting the Z-axis scaling to emphasize height differences.
 
 2. **Zoom in and out**  
-   ![Gradient Colors](https://github.com/yettabaa/FdF/blob/main/assets/FdF-Zoom.gif)  
+   ![Gradient Colors](https://github.com/yettabaa/FdF/blob/master/assets/FdF-Zoom.gif)  
    Apply Scaling to the X and Y axes.
 
 3. **Translation**  
-   ![Interactive Controls](https://github.com/yettabaa/FdF/blob/main/assets/FdF-Translation.gif)  
+   ![Interactive Controls](https://github.com/yettabaa/FdF/blob/master/assets/FdF-Translation.gif)  
    Apply Translation to the X and Y axes.
 
 4. **Rotation**  
-   ![Projection Switching](https://github.com/yettabaa/FdF/blob/main/assets/FdF-Rotation.gif)
+   ![Projection Switching](https://github.com/yettabaa/FdF/blob/master/assets/FdF-Rotation.gif)
 If we want to rotate around an axis, we change the angle of the rotation matrix relative to this axis.
 
 ---
